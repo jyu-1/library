@@ -8,14 +8,18 @@ const btn = document.querySelector("#add-btn");
 const bookTable = document.querySelector(".book-table");
 
 const form = document.getElementById("add-form");
+
 function handleForm(event) {
-    event.preventDefault(); addBookToLibrary();
+    event.preventDefault();
+    addBookToLibrary();
+    modal.style.display = "none";
 }
+
 form.addEventListener('submit', handleForm);
 
 function showBook() {
     bookTable.textContent = "";
-    myLibrary.forEach(library => {
+    myLibrary.forEach((library, index) => {
         const row = document.createElement("tr");
         const tdName = document.createElement("td");
         const tdAuthor = document.createElement("td");
@@ -35,6 +39,29 @@ function showBook() {
         btnDelete.innerText = "Delete";
         tdStatus.appendChild(btnStatus);
         tdDelete.appendChild(btnDelete);
+
+        if (library.read === true) {
+            btnStatus.innerText = "Read";
+        }
+        else {
+            btnStatus.innerText = "Not Read";
+        }
+
+        btnStatus.onclick = function () {
+            if (library.read === true) {
+                library.read = false;
+                btnStatus.innerText = "Not Read";
+            }
+            else {
+                library.read = true;
+                btnStatus.innerText = "Read";
+            }
+        }
+
+        btnDelete.onclick = function () {
+            myLibrary.splice(index, 1);
+            showBook();
+        }
 
         row.appendChild(tdName);
         row.appendChild(tdAuthor);
@@ -66,16 +93,19 @@ function Book(name, author, pages, read) {
 }
 
 function addBookToLibrary() {
-    const namee = document.querySelector("#book-name").value;
-    const authorr = document.querySelector("#author-name").value;
-    const pagee = document.querySelector("#pages").value;
-    const readd = document.querySelector("#read-checkbox").checked;
-    const newBook = new Book(namee, authorr, pagee, readd);
-    console.log(newBook.name + newBook.author + newBook.pages + newBook.read);
+    const namee = document.querySelector("#book-name");
+    const authorr = document.querySelector("#author-name");
+    const pagee = document.querySelector("#pages");
+    const readd = document.querySelector("#read-checkbox");
+
+    const newBook = new Book(namee.value, authorr.value, pagee.value, readd.checked);
+
     myLibrary.push(newBook);
+
     showBook();
+
+    namee.value = "";
+    authorr.value = "";
+    pagee.value = "";
+    readd.checked = false;
 }
-
-
-
-
