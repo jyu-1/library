@@ -1,3 +1,16 @@
+const modal = document.querySelector("#myModal");
+const btn = document.querySelector("#add-btn");
+
+btn.onclick = function () {
+    modal.style.display = "block";
+}
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 let myLibrary = [];
 
 function Book(name, author, pages, read) {
@@ -16,3 +29,4 @@ function addBookToLibrary() {
 }
 
 addBookToLibrary();
+
