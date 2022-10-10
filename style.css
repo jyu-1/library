@@ -48,6 +48,44 @@ body {
     justify-content: center;
 }
 
-.content div {
-    flex-basis: 75vw;
+table {
+    border-collapse: collapse;
+}
+
+th {
+    padding: 10px;
+}
+
+td {
+    border-top: 1px solid black;
+    text-align: center;
+    padding: 20px;
+}
+
+button.delete {
+    background-color: rgb(250, 67, 67);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button.delete:hover {
+    background-color: rgb(255, 161, 161) !important;
+    cursor: pointer;
+}
+
+button.status {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button.status:hover {
+    background-color: rgb(184, 184, 184) !important;
+    cursor: pointer;
 }
